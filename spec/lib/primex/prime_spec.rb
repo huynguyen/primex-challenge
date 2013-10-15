@@ -20,13 +20,13 @@ describe Primex::Prime do
   end
 
   describe "#prime?" do
-    it 'returns true for all primes' do
+    it 'true for all primes' do
       expected.each do |i|
         expect(Primex::Prime.new.prime?(i)).to eq true
       end
     end
 
-    it 'returns false for a non prime' do
+    it 'false for a non prime' do
       expect(Primex::Prime.new.prime?(4)).to eq false
     end
   end
