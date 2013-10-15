@@ -13,10 +13,20 @@ module Primex
     end
 
     def infinite_generator
+      comp_cache = Hash.new()
       Enumerator.new do |y|
         number = 2
         loop do
-          y.yield(number) if prime?(number)
+          if comp_cache[number].nil?
+            y.yield(number)
+            comp_cache[number*number] = [number]
+          else
+            comp_cache[number].each do |p|
+              value = comp_cache.fetch(number+p, [])
+              comp_cache[number+p] = value.push(p)
+            end
+            comp_cache.delete(number)
+          end
           number = number + 1
         end
       end
